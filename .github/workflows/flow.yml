@@ -21,19 +21,5 @@ jobs:
           title: "Merge changes from dev to main"
           body: "This pull request merges changes from the dev branch to the main branch."
           draft: false
-          reviewers: codeowners
+          reviewers: CODEOWNERS
           labels: auto-merge
-
-      - name: Merge Pull Request
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNumber = context.payload.pull_request.number;
-            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-            await octokit.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: prNumber,
-              merge_method: 'squash'
-            });
