@@ -20,6 +20,4 @@ jobs:
           branch: main
           title: "Merge changes from dev to main"
           body: "This pull request merges changes from the dev branch to the main branch."
-          draft: false
-          reviewers: CODEOWNERS
-          labels: auto-merge
+          
