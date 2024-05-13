@@ -1,0 +1,22 @@
+name: Update main branch with dev-branch changes
+on:
+  push:
+    branches:
+      - dev-branch
+ 
+jobs:
+  updateMainBranch:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+ 
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          title: Update main branch with dev-branch changes
+          body: |
+            This pull request updates the main branch with the latest changes from the dev-branch.
