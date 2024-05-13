@@ -1,22 +1,32 @@
-name: Update main branch with dev-branch changes
+name: Create Pull Request on Push to Dev
+
 on:
   push:
     branches:
       - dev-branch
- #added comment 0001
+
 jobs:
-  updateMainBranch:
+  create_pull_request:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
- 
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-          title: Update main branch with dev-branch changes
-          body: |
-            This pull request updates the main branch with the latest changes from the dev-branch.
+          title: "Merge changes from dev to main"
+          body: "This pull request merges changes from the dev branch to the main branch."
+          draft: false
+          reviewers: CODEOWNERS
+          labels: auto-merge
+
+      - name: Merge Pull Request
+        uses: peter-evans/merge-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull_request_number: ${{ steps.create_pull_request.outputs.pull-request-number }}
+          merge_method: squash
