@@ -37,7 +37,7 @@ jobs:
           body: "This pull request merges changes from the dev branch to the main branch."
 
   create_pull_request_main_to_release:
-    needs: trigger_approval
+    needs: create_pull_request_dev_to_main
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
