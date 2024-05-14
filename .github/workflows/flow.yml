@@ -15,7 +15,7 @@ jobs:
           secret: ${{ github.TOKEN }}
           approvers: PremJonnavaram
           minimum-approvals: 1
-          issue-title: "Merging dev-branch changes with main"
+          issue-title: "Merging dev-branch changes with main."
           issue-body: "Please approve or deny after reviewing the changes."
           exclude-workflow-initiator-as-approver: false
           additional-approved-words: ''
