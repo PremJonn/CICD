@@ -21,7 +21,7 @@ jobs:
           additional-approved-words: ''
           additional-denied-words: ''
 
-  create_pull_request:
+  create_pull_request_dev_to_main:
     needs: trigger_approval
     runs-on: ubuntu-latest
     steps:
@@ -33,5 +33,21 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
+          title: "Merge changes from dev to main"
+          body: "This pull request merges changes from the dev branch to the main branch."
+
+  create_pull_request_main_to_release:
+    needs: trigger_approval
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: release
           title: "Merge changes from dev to main"
           body: "This pull request merges changes from the dev branch to the main branch."
