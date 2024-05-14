@@ -47,7 +47,6 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
           branch: release
           title: "Merge changes from dev to main"
           body: "This pull request merges changes from the dev branch to the main branch."
