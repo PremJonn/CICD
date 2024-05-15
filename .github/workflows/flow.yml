@@ -48,5 +48,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: release
-          title: "Merge changes from dev to main"
-          body: "This pull request merges changes from the dev branch to the main branch."
+          title: "Merge changes from main to release"
+          body: "This pull request merges changes from the main branch to the release branch."
