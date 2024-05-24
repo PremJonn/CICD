@@ -23,7 +23,7 @@ jobs:
         with:
           branch: main
           base: dev-branch
-          title: "Deno for auto PR"
+          title: "Merge dev and main"
           # Fix email format
           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
           author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
