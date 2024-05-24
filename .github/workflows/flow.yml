@@ -17,7 +17,7 @@ jobs:
         uses: rlespinasse/git-commit-data-action@v1.x
 
       - name: update Author Details
-        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }) > AUTHOR
+        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
 
       - name: Raise Pr
         uses: peter-evans/create-pull-request@v3
