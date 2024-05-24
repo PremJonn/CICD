@@ -11,9 +11,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        # Update to Node.js 20
+        with:
+          node-version: '20'
 
       - name: Extract git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
+        # Update to Node.js 20
+        with:
+          node-version: '20'
 
       - name: Debug environment variables
         run: |
@@ -22,10 +28,13 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
-        with: 
+        # Update to Node.js 20
+        with:
+          node-version: '20'
           branch: "auto-pr-branch"
           base: dev-branch
           title: "Deno for auto PR"
+          # Fix email format
           committer: "${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}"
           author: "${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}"
           body: |
