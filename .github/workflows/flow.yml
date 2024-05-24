@@ -5,32 +5,30 @@ on:
     branches:
       - dev-branch
 
-
 jobs:
   Merge_Branch:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: extract git commit data
+      - name: Extract git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
 
-      - name: update Author Details
-        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+      - name: Debug environment variables
+        run: |
+          echo "GIT_COMMIT_AUTHOR_NAME: $GIT_COMMIT_AUTHOR_NAME"
+          echo "GIT_COMMIT_AUTHOR_EMAIL: $GIT_COMMIT_AUTHOR_EMAIL"
 
-      - name: Raise Pr
+      - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with: 
-         branch: "auto-pr-branch"
-         base: dev-branch
-         title: "deno for auto pr"
-         committer: ${( env.GIT_COMMIT_AUTHOR_NAME }} <$({ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-         author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <$({ env.GIT_COMMIT_AUTHOR_EMAIL }}*>
-         body:
-          This is to show automatic PR creation
-         token: $({ secrets.GITHUB_TOKEN }}
-         delete-branch: true
-         
-
-  
+          branch: "auto-pr-branch"
+          base: dev-branch
+          title: "Deno for auto PR"
+          committer: "${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}"
+          author: "${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}"
+          body: |
+            This is to show automatic PR creation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
