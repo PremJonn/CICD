@@ -1,32 +1,16 @@
+# File: .github/workflows/pull-request.yml
+
 on:
   push:
     branches:
-      - dev-branch
+    - dev-branch
 
 jobs:
-  Merge_Branch:
+  pull-request:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Extract git commit data
-        uses: rlespinasse/git-commit-data-action@v1.x
-
-      - name: Debug environment variables
-        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }}  >  AUTHOR
-          
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        # Update to Node.js 20hb vrjhrb
-        with:
-          branch: main
-          base: dev-branch
-          title: "Merge dev and main"
-          # Fix email format
-          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
-          body: |
-            This is to show automatic PR creation
-          token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+    - name: pull-request
+      uses: diillson/auto-pull-request@v1.0.1
+      with:
+        destination_branch: "main"
